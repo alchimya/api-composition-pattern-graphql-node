@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-service
+  template:
+    metadata:
+      labels:
+        app: inventory-service
+    spec:
+      containers:
+        - name: inventory-service
+          image: apicomp-lab/inventory-service:v1.0.0
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Never
+          env:
+            - name: SERVICE_NAME
+              value: inventory-service

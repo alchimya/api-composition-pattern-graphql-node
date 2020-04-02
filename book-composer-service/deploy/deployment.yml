@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-composer-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: book-composer-service
+  template:
+    metadata:
+      labels:
+        app: book-composer-service
+    spec:
+      containers:
+        - name: book-composer-service
+          image: apicomp-lab/book-composer-service:v1.0.0
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Never
+          env:
+            - name: SERVICE_NAME
+              value: book-composer-service
+            - name: BOOK_SERVICE_URI
+              value: http://book-service.default.svc.cluster.local:8080
+            - name: AUTHOR_SERVICE_URI
+              value: http://author-service.default.svc.cluster.local:8080
+            - name: INVENTORY_SERVICE_URI
+              value: http://inventory-service.default.svc.cluster.local:8080

@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: author-service
+spec:
+  selector:
+    app: author-service
+  ports:
+    - protocol: "TCP"
+      # Port accessible inside cluster
+      port: 8080
+      # Port to forward to inside the pod
+      targetPort: 8080
+  type: ClusterIP

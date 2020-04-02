@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: book-composer-service
+spec:
+  selector:
+    app: book-composer-service
+  ports:
+    - protocol: "TCP"
+      # Port accessible inside cluster
+      port: 8080
+      # Port accessible outside cluster
+      nodePort: 30000
+  type: NodePort

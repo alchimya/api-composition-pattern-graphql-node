@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: book-service
+  template:
+    metadata:
+      labels:
+        app: book-service
+    spec:
+      containers:
+        - name: book-service
+          image: apicomp-lab/book-service:v1.0.0
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Never
+          env:
+            - name: SERVICE_NAME
+              value: book-service
